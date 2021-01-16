@@ -19,12 +19,12 @@ class DishDetail extends Component {
 		if (comments || comments.length) {
 			const list = [];
 			comments.forEach(comment => {
-					list.push(
-						<li key={comment.id}>
-							<p>{comment.comment}</p>
-							<p>--{comment.author},{comment.date}</p>
-						</li>
-					);
+				list.push(
+					<li key={comment.id}>
+						<p>{comment.comment}</p>
+						<p>--{comment.author},{new Intl.DateTimeFormat('default', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+					</li>
+				);
 			});
 			return (
 				<div>
@@ -35,20 +35,21 @@ class DishDetail extends Component {
 				</div>
 			);
 		} else {
-				return (
-					<div />
-				);
+			return (
+				<div />
+			);
 		} 
 	}
 
 	render() {
-			const dish = this.props.dish;
-			if (dish == null) {
-				return(
-					<div />
-				);
-			} else {
-				return(
+		const dish = this.props.dish;
+		if (dish == null) {
+			return(
+				<div />
+			);
+		} else {
+			return(
+				<div className="container">
 					<div className="row ">
 						<div className="col-12 col-md-5 m-1">
 							{this.renderDish(dish)}
@@ -57,8 +58,9 @@ class DishDetail extends Component {
 							{this.renderComments(dish.comments)}
 						</div>
 					</div>
-				)
-			}
+				</div>
+			)
+		}
 	}
 }
 
